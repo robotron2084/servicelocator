@@ -1,0 +1,18 @@
+{
+  "name": "com.enemyhideout.servicelocator",
+  "version": "0.0.1",
+  "displayName": "Service Locator",
+  "description": "This is a simple implementation of the Service Locator pattern, mainly to provide an example.",
+  "unity": "2019.1",
+  "unityRelease": "0b5",
+  "documentationUrl": "https://github.com/robotron2084/servicelocator/",
+  "changelogUrl": "https://github.com/robotron2084/servicelocator/blob/main/changelog.md",
+  "licensesUrl": "https://github.com/robotron2084/servicelocator/blob/main/LICENSE",
+  "dependencies": { },
+ "keywords": [  ],
+  "author": {
+    "name": "Chris Hill",
+    "email": "chris@enemyhideout.com",
+    "url": "https://www.enemyhideout.com"
+  }
+}
