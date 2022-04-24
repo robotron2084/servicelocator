@@ -9,7 +9,7 @@
   "changelogUrl": "https://github.com/robotron2084/servicelocator/blob/main/changelog.md",
   "licensesUrl": "https://github.com/robotron2084/servicelocator/blob/main/LICENSE",
   "dependencies": { },
- "keywords": [  ],
+  "keywords": [  ],
   "author": {
     "name": "Chris Hill",
     "email": "chris@enemyhideout.com",

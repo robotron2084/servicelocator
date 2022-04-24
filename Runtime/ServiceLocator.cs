@@ -1,42 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
+using DefaultNamespace;
 
-namespace com.enemyhideout
+namespace com.enemyhideout.servicelocator
 {
   public static class ServiceLocator
   {
-    private static Dictionary<Type, Object> objects = new Dictionary<Type,Object>();
-    private static Dictionary<Type, Func<Object>> factories = new Dictionary<Type, Func<object>>();
     
-    public static void Register<T>(Object obj)
+    static ServiceLocator()
     {
-      objects[typeof(T)] = obj;
+      _container = new Container();
     }
 
+    // default container. Todo: more containers?
+    private static Container _container;
     
-    public static void RegisterFactory<T>(Func<Object> factoryMethod)
+    public static void Register<T>(object obj)
     {
-      factories[typeof(T)] = factoryMethod;
+      ServiceLocatorCore.Register<T>(_container.Objects, obj);
+    }
+    
+    public static void RegisterFactory<T>(Func<object> factoryMethod)
+    {
+      ServiceLocatorCore.RegisterFactory<T>(_container.Factories, factoryMethod);
     }
 
     public static T Get<T>()
     {
-      Object retVal;
-      objects.TryGetValue(typeof(T), out retVal);
-      if (retVal == null)
-      {
-        Func<Object> factoryMethod;
-        if (factories.TryGetValue(typeof(T), out factoryMethod))
-        {
-          retVal = factoryMethod();
-          if (retVal.GetType() != typeof(T))
-          {
-            throw new InvalidCastException($"{retVal.GetType()} is not of expected type {typeof(T)}");
-          }
-          Register<T>(retVal);
-        }
-      }
-      return (T)retVal;
+      return ServiceLocatorCore.Get<T>(_container.Factories, _container.Objects);
     }
+
+
   }
 }
