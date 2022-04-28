@@ -1,10 +1,10 @@
 # Service Locator Example
 
-This is a working example of the Service Locator pattern for use within the Unity game engine. This repository is provided partially as an actual usable resource, but also as an example of the Service Locator pattern.
+This is a working example of the Service Locator pattern for use within the Unity game engine. This repository is provided as usable code, but also as an example of the Service Locator pattern.
 
 ## The Service Locator Pattern
 
-While [Wikipedia](https://en.wikipedia.org/wiki/Service_locator_pattern) provides a good overview, I want to focus on the following:
+While [Wikipedia's Service Locator Page](https://en.wikipedia.org/wiki/Service_locator_pattern) provides a good overview, I want to focus on the following:
 
  * Why you should use this pattern over Singletons.
  * How to use this pattern.
@@ -98,3 +98,45 @@ void InitializeOnStartup()
 }
 ```
 This works great for unit tests as well!
+
+### How Not To Write Services Code
+
+Frequently you may see code that looks like this:
+```c#
+void DoThing()
+{
+  var myValue = GetValue();
+  MyService.Instance.UpdateValue(myValue);
+}
+
+void DoAnotherThing()
+{
+ var otherValue = GetOtherValue();
+ MyService.Instance.UpdateValue(myValue);
+}
+```
+If for some reason we need to update our class and clean up the code, we have a number of locations where we're using this file. Instead create a member variable so that the usage of the service isn't part of requesting the service:
+
+```c#
+private MyService _myService;
+
+void Init()
+{
+  _myService = ServiceLocator.Get<MyService>();
+}
+
+void DoThing()
+{
+  var myValue = GetValue();
+  _myService.UpdateValue(myValue);
+}
+
+void DoAnotherThing()
+{
+ var otherValue = GetOtherValue();
+ _myService.UpdateValue(myValue);
+}
+```
+
+
+
