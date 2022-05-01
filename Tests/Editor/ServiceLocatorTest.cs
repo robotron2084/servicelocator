@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using DefaultNamespace;
 using NUnit.Framework;
-using NUnit.Framework.Constraints;
 
 namespace com.enemyhideout.servicelocator.tests
 {
@@ -13,8 +12,24 @@ namespace com.enemyhideout.servicelocator.tests
         public void TestRegister([ValueSource(nameof(RegisterTestCases))] RegisterTestCase testCase)
         {
             Dictionary<Type, object> output = new Dictionary<Type, object>(testCase.Input);
-            ServiceLocatorCore.Register(output, testCase.Type, testCase.Obj);
-            Assert.That(output, Is.EqualTo(testCase.Expected));
+            if (testCase.Throws != null)
+            {
+                Assert.Throws(testCase.Throws, () => ServiceLocatorCore.Register(output, testCase.Type, testCase.Obj));
+            }
+            else
+            {
+                ServiceLocatorCore.Register(output, testCase.Type, testCase.Obj);
+                Assert.That(output, Is.EqualTo(testCase.Expected));
+            }
+        }
+
+        [Test]
+        public void TestDoubleRegister()
+        {
+            Dictionary<Type, object> output = new Dictionary<Type, object>();
+            ServiceLocatorCore.Register(output, typeof(TestService), _testService);
+            Assert.Throws<ArgumentException>(() => ServiceLocatorCore.Register(output,typeof(TestService), _testService));
+            Assert.That(output, Is.EqualTo( new Dictionary<Type, object>(){ { typeof(TestService), _testService }}));
         }
 
         private static Dictionary<Type, object> _emptyRegistry = new Dictionary<Type, object>();
@@ -46,6 +61,15 @@ namespace com.enemyhideout.servicelocator.tests
                 Input = _emptyRegistry,
                 Expected = new Dictionary<Type, object>(){ { typeof(ITestService), _testService }}
             },
+            new RegisterTestCase()
+            {
+                Description = "Register null throws",
+                Obj = null,
+                Type = typeof(ITestService),
+                Input = _emptyRegistry,
+                Throws = typeof(NullReferenceException)
+            },
+            
         };
         
         public class TestService : ITestService {}
@@ -68,6 +92,7 @@ namespace com.enemyhideout.servicelocator.tests
             public Type Type;
             public Dictionary<Type, object> Input;
             public Dictionary<Type, object> Expected;
+            public Type Throws;
         }
         
         public class RegisterFactoryTestCase : TestCaseBase

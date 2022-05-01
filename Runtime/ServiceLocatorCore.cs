@@ -12,7 +12,11 @@ namespace DefaultNamespace
 
         public static void Register(Dictionary<Type, object> registry, Type t,  Object obj)
         {
-            registry[t] = obj;
+            if (obj == null)
+            {
+                throw new NullReferenceException($"Attempting to insert a null reference for {t}");
+            }
+            registry.Add(t, obj);
         }
 
         
