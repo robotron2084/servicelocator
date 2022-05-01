@@ -1,0 +1,16 @@
+{
+    "name": "SimpleGameExample",
+    "rootNamespace": "",
+    "references": [
+        "GUID:3672e69500ba305459c8851a49d608b1"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

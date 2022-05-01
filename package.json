@@ -14,5 +14,17 @@
     "name": "Chris Hill",
     "email": "chris@enemyhideout.com",
     "url": "https://www.enemyhideout.com"
-  }
+  },
+  "samples": [
+    {
+      "displayName": "No Frills Example",
+      "description": "No Frills usage of Service Locator",
+      "path": "Samples~/No Frills Example"
+    },
+    {
+      "displayName": "Simple Game Example",
+      "description": "Example Game using Service Locator",
+      "path": "Samples~/Simple Game Example"
+    }
+  ]
 }

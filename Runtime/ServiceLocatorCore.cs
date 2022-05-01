@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DefaultNamespace
 {
-    public class ServiceLocatorCore
+    internal class ServiceLocatorCore
     {
         public static void Register<T>(Dictionary<Type, object> registry, Object obj)
         {
