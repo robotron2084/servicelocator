@@ -26,12 +26,11 @@ Enter Service Locator. In essence, this is an uber-Singleton. A singleton to rul
 
 ## Installation
 
-This repo is a Unity Package. You can install from disk or from Github via Package Manager.
+This repo is a Unity Package. You can install from disk or from Github via Package Manager. There are two sample projects to help give an example of usage. These can also be imported via Package Manager.
 
 ## Using Service Locator
 
 There are two steps involved to using services: registering them, and using them. 
-
 
 ## Registering Services
 You can register a service by either registering the service directly, or by registering a 'factory' method that will create the service when it is first accessed. Do this upon startup of your game.
