@@ -11,7 +11,7 @@ While [Wikipedia's Service Locator Page](https://en.wikipedia.org/wiki/Service_l
  * How not to write services or other singleton code.
 
 Things I won't touch on here:
- * Dependency Injection and its Benefits
+ * Dependency Injection and its benefits
  * Disadvantages, why this is an 'anti-pattern', etc.
  
 ## Stop Writing Singletons
