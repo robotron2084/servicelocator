@@ -32,6 +32,19 @@ namespace com.enemyhideout.servicelocator.tests
             Assert.That(output, Is.EqualTo( new Dictionary<Type, object>(){ { typeof(TestService), _testService }}));
         }
 
+        [Test]
+        public void TestReset()
+        {
+            ServiceLocator.Register<TestService>(_testService);
+            ServiceLocator.Reset();
+            Assert.Throws<NullReferenceException>(() => ServiceLocator.Get<TestService>());
+
+            var anotherService = new TestService();
+            ServiceLocator.Register<TestService>(anotherService);
+            var gotten = ServiceLocator.Get<TestService>();
+            Assert.That(gotten, Is.EqualTo(anotherService));
+        }
+
         private static Dictionary<Type, object> _emptyRegistry = new Dictionary<Type, object>();
         private static TestService _testService = new TestService();
 

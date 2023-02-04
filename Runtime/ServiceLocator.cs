@@ -12,6 +12,11 @@ namespace com.enemyhideout.servicelocator
       _container = new Container();
     }
 
+    public static void Reset()
+    {
+      _container = new Container();
+    }
+
     // default container. Todo: more containers?
     private static Container _container;
     
@@ -29,7 +34,6 @@ namespace com.enemyhideout.servicelocator
     {
       return ServiceLocatorCore.Get<T>(_container.Factories, _container.Objects);
     }
-
 
   }
 }
